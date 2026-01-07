@@ -201,7 +201,9 @@ sample-02/
 │   └── deployment.md         # Deployment process and environments.
 ├── src/                      # Source code (structure depends on stack).
 ├── tests/                    # Test files.
-├── CLAUDE.md                 # Quick context for Claude Code.
+├── CLAUDE.md                 # AI agent instructions (open standard)
+├── AGENTS.md                 # Quick context for Claude Code, redirects to AGENTS.md.
+├── LICENSE                   # License for the project.
 └── README.md                 # This file.
 ```
 
