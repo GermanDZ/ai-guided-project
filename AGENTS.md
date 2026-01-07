@@ -36,10 +36,13 @@ cd <project-name>
 This project uses a documentation-driven workflow. Before implementing:
 
 1. Read `docs/how-to-work/agent.md` for collaboration guidelines
-2. Read `docs/how-to-work/stack.md` for technology choices
-3. Read `docs/how-to-work/architecture.md` for system design
-4. Read `docs/how-to-work/conventions.md` for coding standards
-5. Check `docs/how-to-work/roadmap.md` for current tasks
+2. Read `docs/product/use-cases/README.md` to understand how product features are defined
+3. Read `docs/how-to-work/stack.md` for technology choices
+4. Read `docs/how-to-work/architecture.md` for system design
+5. Read `docs/how-to-work/conventions.md` for coding standards
+6. Check `docs/how-to-work/roadmap.md` for current tasks
+
+**Important**: When implementing a feature, always read the use case(s) referenced in the roadmap task. Use cases are the source of truth for what features should do.
 
 ### Key Principles
 
@@ -228,16 +231,18 @@ docs/           # Documentation
 
 ## When Stuck
 
-1. Check `docs/how-to-work/decisions.md` for past architectural decisions
-2. Check `docs/how-to-work/glossary.md` for domain terminology
-3. Ask for clarification rather than assuming
-4. Surface trade-offs and propose alternatives
+1. Check the relevant use case(s) in `docs/product/use-cases/` for feature requirements
+2. Check `docs/how-to-work/decisions.md` for past architectural decisions
+3. Check `docs/how-to-work/glossary.md` for domain terminology
+4. Ask for clarification rather than assuming
+5. Surface trade-offs and propose alternatives
 
 ---
 
 ## Additional Resources
 
 - [Workflow Guide](docs/how-to-work/agent.md)
+- [Use Cases](docs/product/use-cases/README.md) - Source of truth for product features
 - [Architecture](docs/how-to-work/architecture.md)
 - [Tech Stack](docs/how-to-work/stack.md)
 - [Conventions](docs/how-to-work/conventions.md)

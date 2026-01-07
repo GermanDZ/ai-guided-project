@@ -109,12 +109,15 @@ These documents reflect the current state of the project. They should be updated
 When starting a session, agents should read these documents in order:
 
 1. `docs/how-to-work/agent.md` (this file) — understand the workflow
-2. `docs/how-to-work/stack.md` — understand the technology
-3. `docs/how-to-work/architecture.md` — understand the system design
-4. `docs/how-to-work/conventions.md` — understand coding standards
-5. `docs/how-to-work/roadmap.md` — understand current priorities
+2. `docs/product/use-cases/README.md` — understand how product features are defined
+3. `docs/how-to-work/stack.md` — understand the technology
+4. `docs/how-to-work/architecture.md` — understand the system design
+5. `docs/how-to-work/conventions.md` — understand coding standards
+6. `docs/how-to-work/roadmap.md` — understand current priorities
 
 For specific tasks, also consult:
+- Relevant use case(s) in `docs/product/use-cases/` — the source of truth for what features should do
+- `docs/product/use-cases/VALIDATION.md` — validate use cases before implementation
 - `docs/how-to-work/decisions.md` — for context on why things are the way they are
 - `docs/how-to-work/glossary.md` — for domain terminology
 
@@ -179,6 +182,10 @@ When asked to implement a feature or fix:
 ### 1. Understand
 
 - Read the relevant issue/task in `roadmap.md`
+- **Read the referenced use case(s) in `docs/product/use-cases/`** — this is the source of truth for what the feature should do
+- **Validate the use case(s) using the checklist in `docs/product/use-cases/VALIDATION.md`**
+  - If validation fails, report issues to the human and ask for clarification
+  - Do not proceed until the use case is validated and ready
 - Check `decisions.md` for related architectural context
 - Review `architecture.md` to understand affected components
 - **Ask questions if anything is unclear**—don't assume
@@ -240,6 +247,7 @@ Before requesting review:
 | New technology added | `stack.md` |
 | Architecture changed | `architecture.md`, possibly `decisions.md` |
 | New conventions established | `conventions.md` |
+| New feature defined | `docs/product/use-cases/` (create new use case) |
 | Task completed | `roadmap.md` (mark done), `changelog.md` |
 | New domain term introduced | `glossary.md` |
 
@@ -278,9 +286,9 @@ Human: Implement the user authentication feature from the roadmap
 
 Agent: I'll implement user authentication. Let me first review the relevant docs...
 
-[reads docs/how-to-work/architecture.md, stack.md, roadmap.md]
+[reads docs/product/use-cases/user-logs-in.md, docs/how-to-work/architecture.md, stack.md, roadmap.md]
 
-Based on the architecture, I'll need to:
+Based on the use case and architecture, I'll need to:
 1. Refactor the middleware structure to support auth hooks
 2. Add the auth utilities and types
 3. Implement the auth middleware
@@ -304,11 +312,14 @@ Does this approach look right before I proceed?
 
 ### Before Starting Any Task
 ```
-1. Read: docs/how-to-work/agent.md → stack.md → architecture.md → roadmap.md
+1. Read: docs/how-to-work/agent.md → docs/product/use-cases/README.md → stack.md → architecture.md → roadmap.md
 2. Identify: Which issue/task am I solving?
-3. Ask: Is anything unclear? Is this actually needed? (YAGNI)
-4. Plan: What's my commit sequence? What's the smallest working increment?
-5. Confirm: Get approval on the plan (conversation, not contract)
+3. Read: The use case(s) referenced in the roadmap task
+4. Validate: Check the use case against docs/product/use-cases/VALIDATION.md checklist
+   - If validation fails, report issues and wait for revision
+5. Ask: Is anything unclear? Is this actually needed? (YAGNI)
+6. Plan: What's my commit sequence? What's the smallest working increment?
+7. Confirm: Get approval on the plan (conversation, not contract)
 ```
 
 ### Before Each Commit
