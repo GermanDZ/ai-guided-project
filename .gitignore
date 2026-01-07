@@ -1,0 +1,76 @@
+# Dependencies
+node_modules/
+vendor/
+.bundle/
+__pycache__/
+*.pyc
+.venv/
+venv/
+target/
+.gradle/
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+_build/
+pkg/
+bin/
+*.egg-info/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.production
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Test coverage
+coverage/
+.nyc_output/
+htmlcov/
+.coverage
+.pytest_cache/
+.tox/
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.prettiercache
+*.cache
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Language-specific
+*.class
+*.jar
+*.war
+*.exe
+*.dll
+*.so
+*.dylib
