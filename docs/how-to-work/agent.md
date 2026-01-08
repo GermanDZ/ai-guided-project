@@ -236,6 +236,20 @@ Before requesting review:
 - Ensure all commits are atomic and pass tests
 - Write a clear PR description linking to the issue
 
+### 5. Task Completion
+
+After completing a task or at the end of a sprint:
+
+1. **Ask for permission** - Always request human approval before updating the roadmap
+2. **Propose roadmap update** - Ask: "Should I update the roadmap to mark this task as completed?"
+3. **If permission granted**, update `docs/how-to-work/roadmap.md`:
+   - Move the completed task from "In Progress" or "Up Next" to the "Completed" section
+   - Include task ID, description, PR number, and completion date (YYYY-MM-DD)
+   - Remove the task from "In Progress" section if it was listed there
+   - For sprints, provide a brief summary of what was completed
+
+**Important**: The roadmap is a state document that must reflect current progress, but all updates require explicit human approval to ensure accuracy and maintain oversight.
+
 ---
 
 ## Documentation Updates
@@ -337,6 +351,7 @@ Does this approach look right before I proceed?
 3. Is it the smallest shippable increment?
 4. Docs updated if needed?
 5. PR description links to issue?
+6. Asked human for permission to update roadmap? (see Task Completion step)
 ```
 
 ### When Blocked or Uncertain

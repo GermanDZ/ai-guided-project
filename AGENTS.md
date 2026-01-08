@@ -52,6 +52,20 @@ This project uses a documentation-driven workflow. Before implementing:
 - **Working software**: Every commit is deployable
 - **Simplicity**: YAGNI—don't over-engineer
 
+### Task Completion
+
+After completing a task or sprint:
+
+1. **Always ask permission first** - Never update the roadmap without explicit human approval
+2. **Request roadmap update** - Ask the human if you should update `docs/how-to-work/roadmap.md`
+3. **What to update** (if permission granted):
+   - Move completed tasks from "In Progress" or "Up Next" to the "Completed" section
+   - Include task ID, description, PR number, and completion date
+   - Remove tasks from "In Progress" section if they were listed there
+   - For sprints, summarize what was completed
+
+The roadmap is a state document that must stay current, but updates require human oversight.
+
 ---
 
 ## Commands
