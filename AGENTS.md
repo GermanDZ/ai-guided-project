@@ -33,17 +33,55 @@ cd <project-name>
 
 ## Workflow
 
-This project uses a documentation-driven workflow. Before implementing:
+This project uses a documentation-driven workflow with **Unified Process** phase management.
 
-1. Read `docs/how-to-work/agent.md` for collaboration guidelines
-2. Read `docs/product/use-cases/README.md` to understand how product features are defined
-3. Read `docs/how-to-work/stack.md` for technology choices
-4. Read `docs/how-to-work/architecture.md` for system design
-5. Read `docs/how-to-work/conventions.md` for coding standards
-6. Read `docs/how-to-work/tdd.md` for test-driven development practice
-7. Check `docs/how-to-work/roadmap.md` for current tasks
+### ⚠️ MANDATORY: Phase-First Workflow
 
-**Important**: When implementing a feature, always read the use case(s) referenced in the roadmap task. Use cases are the source of truth for what features should do.
+**ALL work must be done within a phase context. No exceptions.**
+
+#### Before ANY Implementation
+
+AI agents MUST follow this sequence:
+
+1. **Check phase plans exist** - Look for `docs/plans/{phase}/roadmap.md` files
+   - If NO phase plans exist: STOP and request human initialize Inception phase
+   - Cannot proceed without phase context
+
+2. **Identify current phase** - Find which phase has status "In Progress"
+   - Projects start with Inception → Elaboration → Construction → Transition
+   - Cannot skip phases
+
+3. **Check current iteration** - Find iteration with status "In Progress" in current phase roadmap
+   - All work happens within an iteration
+   - Cannot work outside iteration context
+
+4. **Verify task exists** - Confirm task is listed in iteration's "Planned Work" table
+   - If task missing: Request human add it to roadmap first
+   - Cannot implement unplanned tasks
+
+5. **Only then proceed** with reading documentation and implementing
+
+#### Required Documentation Reading Order
+
+Once phase context is confirmed, read in this order:
+
+1. `docs/how-to-work/phase-planning.md` - **MANDATORY** phase workflow
+2. Current phase `docs/plans/{phase}/roadmap.md` - Current iteration tasks
+3. Current phase `docs/plans/{phase}/outputs.md` - Required deliverables
+4. `docs/product/use-cases/README.md` - How features are defined
+5. Use case(s) referenced in your task - Feature requirements
+6. `docs/how-to-work/agent.md` - Collaboration guidelines
+7. `docs/how-to-work/stack.md` - Technology choices
+8. `docs/how-to-work/architecture.md` - System design
+9. `docs/how-to-work/conventions.md` - Coding standards
+10. `docs/how-to-work/tdd.md` - Test-driven development practice
+11. `docs/how-to-work/roadmap.md` - High-level project roadmap
+
+**Critical Rules**:
+- Use cases are the source of truth for what features should do
+- Phase roadmaps define WHEN work happens
+- Phase outputs define WHAT artifacts are required
+- All three must align for any implementation work
 
 ### Key Principles
 
@@ -56,17 +94,29 @@ This project uses a documentation-driven workflow. Before implementing:
 
 ### Task Completion
 
-After completing a task or sprint:
+After completing a task, iteration, or sprint:
 
-1. **Always ask permission first** - Never update the roadmap without explicit human approval
-2. **Request roadmap update** - Ask the human if you should update `docs/how-to-work/roadmap.md`
+1. **Always ask permission first** - Never update roadmaps without explicit human approval
+2. **Request roadmap update** - Ask the human if you should update roadmap files
 3. **What to update** (if permission granted):
-   - Move completed tasks from "In Progress" or "Up Next" to the "Completed" section
+
+   **For phase roadmaps** (`docs/plans/{phase}/roadmap.md`):
+   - Update "Actual Progress" section in iteration
+   - Mark completed tasks in "Planned Work" table
+   - Document lessons learned
+   - Update iteration status
+
+   **For project roadmap** (`docs/how-to-work/roadmap.md`):
+   - Move completed tasks from "In Progress" or "Up Next" to "Completed"
    - Include task ID, description, PR number, and completion date
-   - Remove tasks from "In Progress" section if they were listed there
    - For sprints, summarize what was completed
 
-The roadmap is a state document that must stay current, but updates require human oversight.
+   **For phase outputs** (`docs/plans/{phase}/outputs.md`):
+   - Update artifact status (In Progress → Completed)
+   - Check off acceptance criteria
+   - Update progress percentages
+
+Roadmap and planning documents are state documents that must stay current, but updates require human oversight.
 
 ---
 
@@ -242,6 +292,12 @@ src/            # Source code
 tests/          # Test files
 docs/           # Documentation
   how-to-work/  # Workflow docs (read these first)
+  plans/        # Phase-based iteration planning
+    inception/  # Inception phase roadmap and outputs
+    elaboration/  # Elaboration phase roadmap and outputs
+    construction/  # Construction phase roadmap and outputs
+    transition/  # Transition phase roadmap and outputs
+  product/      # Product documentation (use cases, features)
 ```
 
 ### Important Patterns
@@ -271,10 +327,17 @@ docs/           # Documentation
 
 ## Additional Resources
 
-- [Workflow Guide](docs/how-to-work/agent.md)
-- [Use Cases](docs/product/use-cases/README.md) - Source of truth for product features
+### Core Workflow
+- [Workflow Guide](docs/how-to-work/agent.md) - How to work with humans and other agents
+- [Phase Planning](docs/how-to-work/phase-planning.md) - Unified Process phase and iteration management
 - [Test-Driven Development](docs/how-to-work/tdd.md) - TDD practice and examples
-- [Architecture](docs/how-to-work/architecture.md)
-- [Tech Stack](docs/how-to-work/stack.md)
-- [Conventions](docs/how-to-work/conventions.md)
-- [Roadmap](docs/how-to-work/roadmap.md)
+
+### Planning & Requirements
+- [Project Roadmap](docs/how-to-work/roadmap.md) - High-level project plan
+- [Phase Roadmaps](docs/plans/) - Detailed iteration plans by phase
+- [Use Cases](docs/product/use-cases/README.md) - Source of truth for product features
+
+### Technical
+- [Architecture](docs/how-to-work/architecture.md) - System design and patterns
+- [Tech Stack](docs/how-to-work/stack.md) - Technology choices
+- [Conventions](docs/how-to-work/conventions.md) - Coding standards
