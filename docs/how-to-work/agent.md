@@ -124,6 +124,83 @@ For specific tasks, also consult:
 
 ---
 
+## Phase-Based Workflow (MANDATORY)
+
+### ⚠️ Phase Context is Required
+
+**Before starting ANY implementation work, agents MUST verify phase context exists.**
+
+This project follows the Unified Process with four phases: Inception → Elaboration → Construction → Transition.
+
+#### Pre-Work Checklist (MANDATORY)
+
+Every agent session MUST start with:
+
+```
+□ 1. Check if phase plans exist
+   → Look for docs/plans/{phase}/roadmap.md files
+   → If NONE exist: STOP and request human initialize Inception
+
+□ 2. Identify current phase
+   → Read phase roadmaps to find status "In Progress"
+   → Valid phases: inception, elaboration, construction, transition
+   → If NO active phase: Request human start appropriate phase
+
+□ 3. Identify current iteration
+   → Open current phase's roadmap.md
+   → Find iteration with status "In Progress"
+   → This is your work context
+
+□ 4. Verify task exists in roadmap
+   → Check iteration's "Planned Work" table
+   → Find task matching your request
+   → If NOT listed: Ask human to add task to roadmap first
+
+□ 5. Read task requirements
+   → Check "Use Cases Addressed" in iteration
+   → Read those use case files
+   → Review artifact requirements in outputs.md
+
+□ 6. NOW proceed with implementation
+```
+
+#### Why This Matters
+
+- **No ad-hoc work**: Every task must be planned and tracked
+- **Phase progression**: Ensures proper order (can't build before designing)
+- **Traceability**: Links implementation to requirements and iterations
+- **Quality gates**: Phase exits ensure readiness for next phase
+
+#### If Phase Plans Don't Exist
+
+Use this response template:
+
+```
+I notice that phase planning documents don't exist yet for this project.
+
+According to the project workflow, all implementation work must be done
+within a phase context, and projects must start with the Inception phase.
+
+Would you like me to help initialize the Inception phase? I can:
+1. Copy the templates to docs/plans/inception/
+2. Help you define initial phase goals and iterations
+
+Or would you prefer to create the phase plans yourself first?
+
+I cannot proceed with implementation until phase context is established.
+```
+
+#### Finding Current Work
+
+```bash
+# Quick command to find your current task
+find docs/plans -name "roadmap.md" -exec grep -l "Status.*In Progress" {} \;
+```
+
+See `docs/how-to-work/phase-planning.md` for complete phase workflow documentation.
+
+---
+
 ## Development Workflow
 
 ### Branch Strategy
@@ -180,10 +257,20 @@ Types: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`
 
 When asked to implement a feature or fix:
 
+### 0. Verify Phase Context (FIRST STEP)
+
+**This step is mandatory and comes before everything else:**
+
+- Confirm phase plans exist (see "Phase-Based Workflow" section above)
+- Identify current phase and iteration
+- Verify task exists in current iteration's roadmap
+- **If any check fails: STOP and request human action**
+
 ### 1. Understand
 
-- Read the relevant issue/task in `roadmap.md`
+- Read the task in current phase's `roadmap.md` (Planned Work table)
 - **Read the referenced use case(s) in `docs/product/use-cases/`** — this is the source of truth for what the feature should do
+- Check required artifacts in current phase's `outputs.md`
 - **Validate the use case(s) using the checklist in `docs/product/use-cases/VALIDATION.md`**
   - If validation fails, report issues to the human and ask for clarification
   - Do not proceed until the use case is validated and ready
