@@ -40,7 +40,8 @@ This project uses a documentation-driven workflow. Before implementing:
 3. Read `docs/how-to-work/stack.md` for technology choices
 4. Read `docs/how-to-work/architecture.md` for system design
 5. Read `docs/how-to-work/conventions.md` for coding standards
-6. Check `docs/how-to-work/roadmap.md` for current tasks
+6. Read `docs/how-to-work/tdd.md` for test-driven development practice
+7. Check `docs/how-to-work/roadmap.md` for current tasks
 
 **Important**: When implementing a feature, always read the use case(s) referenced in the roadmap task. Use cases are the source of truth for what features should do.
 
@@ -48,6 +49,7 @@ This project uses a documentation-driven workflow. Before implementing:
 
 - **Small PRs**: Each PR solves exactly one issue
 - **Atomic commits**: Each commit does one thing and passes all tests
+- **Test-Driven Development**: Write tests first (RED), make them pass (GREEN), then refactor
 - **Refactor first**: Preparation commits before feature commits
 - **Working software**: Every commit is deployable
 - **Simplicity**: YAGNI—don't over-engineer
@@ -177,14 +179,16 @@ Types: feat, fix, refactor, test, docs, chore
 
 ### Commit Sequence
 
-When implementing a feature, follow this order:
+When implementing a feature using TDD, follow this order:
 
-1. `refactor`: Prepare codebase for changes
-2. `test`: Add tests for new functionality
-3. `feat`/`fix`: Implement the actual change
-4. `docs`: Update documentation
+1. `refactor`: Prepare codebase for changes (all tests GREEN)
+2. `test`: Add failing test for next requirement (RED)
+3. `feat`/`fix`: Implement code to pass test (GREEN)
+4. `refactor`: Clean up code (still GREEN)
+5. Repeat steps 2-4 for each requirement
+6. `docs`: Update documentation
 
-Each commit must pass all tests.
+Each GREEN commit must pass all tests. RED commits may have failing tests (the new ones only).
 
 ### Pull Requests
 
@@ -196,6 +200,18 @@ Each commit must pass all tests.
 ---
 
 ## Testing
+
+This project uses **Test-Driven Development (TDD)** for building features. See `docs/how-to-work/tdd.md` for detailed guidance.
+
+### TDD Cycle
+
+```
+RED → GREEN → REFACTOR
+```
+
+1. **RED**: Write a failing test
+2. **GREEN**: Write simplest code to pass
+3. **REFACTOR**: Clean up while keeping tests green
 
 ### What to Test
 
@@ -257,6 +273,7 @@ docs/           # Documentation
 
 - [Workflow Guide](docs/how-to-work/agent.md)
 - [Use Cases](docs/product/use-cases/README.md) - Source of truth for product features
+- [Test-Driven Development](docs/how-to-work/tdd.md) - TDD practice and examples
 - [Architecture](docs/how-to-work/architecture.md)
 - [Tech Stack](docs/how-to-work/stack.md)
 - [Conventions](docs/how-to-work/conventions.md)

@@ -134,6 +134,15 @@ Types: feat, fix, refactor, test, docs, chore
 
 ## Testing
 
+This project uses **Test-Driven Development (TDD)**. See `docs/how-to-work/tdd.md` for comprehensive guidance.
+
+### TDD Workflow
+
+Follow the RED-GREEN-REFACTOR cycle:
+1. **RED**: Write a failing test
+2. **GREEN**: Write simplest code to make it pass
+3. **REFACTOR**: Clean up while keeping tests green
+
 ### What to Test
 
 - Business logic and data transformations
