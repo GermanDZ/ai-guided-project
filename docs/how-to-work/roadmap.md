@@ -174,6 +174,9 @@ When adding a new task, include:
 
 **Goal**: What should be true when this is done?
 
+**Use Case**: `docs/product/use-cases/[use-case-name].md`
+- [ ] Use case validated (see docs/product/use-cases/VALIDATION.md)
+
 **Acceptance Criteria**:
 - [ ] Criterion 1
 - [ ] Criterion 2
@@ -185,3 +188,5 @@ Any implementation hints or constraints
 - Related ADR: ADR-XXX (in docs/how-to-work/decisions.md)
 - Related docs: docs/how-to-work/architecture.md#section
 ```
+
+**Note**: If the task implements a feature, it must reference a validated use case. Agents will validate the use case before starting implementation.

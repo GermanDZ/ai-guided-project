@@ -109,12 +109,16 @@ These documents reflect the current state of the project. They should be updated
 When starting a session, agents should read these documents in order:
 
 1. `docs/how-to-work/agent.md` (this file) — understand the workflow
-2. `docs/how-to-work/stack.md` — understand the technology
-3. `docs/how-to-work/architecture.md` — understand the system design
-4. `docs/how-to-work/conventions.md` — understand coding standards
-5. `docs/how-to-work/roadmap.md` — understand current priorities
+2. `docs/product/use-cases/README.md` — understand how product features are defined
+3. `docs/how-to-work/stack.md` — understand the technology
+4. `docs/how-to-work/architecture.md` — understand the system design
+5. `docs/how-to-work/conventions.md` — understand coding standards
+6. `docs/how-to-work/tdd.md` — understand test-driven development practice
+7. `docs/how-to-work/roadmap.md` — understand current priorities
 
 For specific tasks, also consult:
+- Relevant use case(s) in `docs/product/use-cases/` — the source of truth for what features should do
+- `docs/product/use-cases/VALIDATION.md` — validate use cases before implementation
 - `docs/how-to-work/decisions.md` — for context on why things are the way they are
 - `docs/how-to-work/glossary.md` — for domain terminology
 
@@ -179,6 +183,10 @@ When asked to implement a feature or fix:
 ### 1. Understand
 
 - Read the relevant issue/task in `roadmap.md`
+- **Read the referenced use case(s) in `docs/product/use-cases/`** — this is the source of truth for what the feature should do
+- **Validate the use case(s) using the checklist in `docs/product/use-cases/VALIDATION.md`**
+  - If validation fails, report issues to the human and ask for clarification
+  - Do not proceed until the use case is validated and ready
 - Check `decisions.md` for related architectural context
 - Review `architecture.md` to understand affected components
 - **Ask questions if anything is unclear**—don't assume
@@ -196,29 +204,45 @@ Share this plan for approval before proceeding. **This is a conversation, not a 
 
 ### 3. Implement (commit by commit)
 
-**Goal: Working software at every step.**
+**Goal: Working software at every step using Test-Driven Development (TDD).**
+
+**For detailed TDD guidance, see `docs/how-to-work/tdd.md`**
 
 ```
 Phase 1: Preparation
   - Refactor existing code to make room for changes
   - Each refactor is a separate commit
   - Run tests after each commit ← non-negotiable
+  - All tests must be GREEN before starting TDD cycle
 
-Phase 2: Foundation
-  - Add new tests (they may fail initially)
-  - Add any new utilities or helpers needed
-  - Keep it simple—add only what's necessary
+Phase 2: TDD Cycle (repeat for each piece of functionality)
+  RED:
+    - Write a failing test for the next small requirement
+    - Commit: [test] Add test for <specific behavior>
+    - Verify test fails for the right reason
 
-Phase 3: Implementation
-  - Implement the feature/fix
-  - Make tests pass
-  - Working software is the measure of progress
+  GREEN:
+    - Write simplest code to make the test pass
+    - Commit: [feat/fix] Implement <specific behavior>
+    - All tests must pass
 
-Phase 4: Documentation
+  REFACTOR (if needed):
+    - Improve code quality without changing behavior
+    - Commit: [refactor] Clean up <what you improved>
+    - All tests must still pass
+
+Phase 3: Documentation
   - Update relevant docs
   - Add to changelog if significant
   - Docs follow code, not the reverse
 ```
+
+**TDD Guidelines:**
+- Start with the simplest test case
+- One test at a time—don't write multiple failing tests
+- Each GREEN commit must have all tests passing
+- Test behavior, not implementation details
+- Keep tests fast and isolated
 
 **If requirements change mid-implementation:** Stop, acknowledge, adapt. This is expected and welcome.
 
@@ -228,6 +252,20 @@ Before requesting review:
 - Rebase on latest main if needed
 - Ensure all commits are atomic and pass tests
 - Write a clear PR description linking to the issue
+
+### 5. Task Completion
+
+After completing a task or at the end of a sprint:
+
+1. **Ask for permission** - Always request human approval before updating the roadmap
+2. **Propose roadmap update** - Ask: "Should I update the roadmap to mark this task as completed?"
+3. **If permission granted**, update `docs/how-to-work/roadmap.md`:
+   - Move the completed task from "In Progress" or "Up Next" to the "Completed" section
+   - Include task ID, description, PR number, and completion date (YYYY-MM-DD)
+   - Remove the task from "In Progress" section if it was listed there
+   - For sprints, provide a brief summary of what was completed
+
+**Important**: The roadmap is a state document that must reflect current progress, but all updates require explicit human approval to ensure accuracy and maintain oversight.
 
 ---
 
@@ -240,6 +278,7 @@ Before requesting review:
 | New technology added | `stack.md` |
 | Architecture changed | `architecture.md`, possibly `decisions.md` |
 | New conventions established | `conventions.md` |
+| New feature defined | `docs/product/use-cases/` (create new use case) |
 | Task completed | `roadmap.md` (mark done), `changelog.md` |
 | New domain term introduced | `glossary.md` |
 
@@ -278,24 +317,29 @@ Human: Implement the user authentication feature from the roadmap
 
 Agent: I'll implement user authentication. Let me first review the relevant docs...
 
-[reads docs/how-to-work/architecture.md, stack.md, roadmap.md]
+[reads docs/product/use-cases/user-logs-in.md, docs/how-to-work/architecture.md, stack.md, tdd.md, roadmap.md]
 
-Based on the architecture, I'll need to:
-1. Refactor the middleware structure to support auth hooks
-2. Add the auth utilities and types
-3. Implement the auth middleware
-4. Add the login/logout endpoints
-5. Update docs
+Based on the use case and architecture, I'll use TDD to implement authentication.
 
-Here's my proposed commit sequence:
+Test cases from use case:
+1. Valid credentials return a JWT token
+2. Invalid credentials return error
+3. Missing credentials return validation error
+4. Token verification works correctly
+
+Here's my proposed commit sequence (using TDD):
 1. refactor(middleware): extract base middleware class
-2. refactor(types): add user and session types  
-3. test(auth): add auth middleware tests
-4. feat(auth): implement JWT-based auth middleware
-5. feat(api): add login and logout endpoints
-6. docs: update architecture and changelog
+2. refactor(types): add user and session types
+3. test(auth): add test for valid credential authentication (RED)
+4. feat(auth): implement basic JWT auth (GREEN)
+5. refactor(auth): extract token generation (REFACTOR)
+6. test(auth): add test for invalid credentials (RED)
+7. feat(auth): add credential validation (GREEN)
+8. test(auth): add test for token verification (RED)
+9. feat(auth): implement token verification (GREEN)
+10. docs: update architecture and changelog
 
-Does this approach look right before I proceed?
+Does this TDD approach look right before I proceed?
 ```
 
 ---
@@ -304,11 +348,32 @@ Does this approach look right before I proceed?
 
 ### Before Starting Any Task
 ```
-1. Read: docs/how-to-work/agent.md → stack.md → architecture.md → roadmap.md
+1. Read: docs/how-to-work/agent.md → docs/product/use-cases/README.md → stack.md → architecture.md → tdd.md → roadmap.md
 2. Identify: Which issue/task am I solving?
-3. Ask: Is anything unclear? Is this actually needed? (YAGNI)
-4. Plan: What's my commit sequence? What's the smallest working increment?
-5. Confirm: Get approval on the plan (conversation, not contract)
+3. Read: The use case(s) referenced in the roadmap task
+4. Validate: Check the use case against docs/product/use-cases/VALIDATION.md checklist
+   - If validation fails, report issues and wait for revision
+5. Ask: Is anything unclear? Is this actually needed? (YAGNI)
+6. Plan: What's my commit sequence? What test cases do I need? What's the smallest working increment?
+7. Confirm: Get approval on the plan (conversation, not contract)
+```
+
+### During TDD Cycle
+```
+RED:
+1. Write one failing test for the next small requirement
+2. Run tests and verify it fails for the right reason
+3. Commit: [test] Add test for <specific behavior>
+
+GREEN:
+1. Write simplest code to make the test pass
+2. Run all tests and verify they pass
+3. Commit: [feat/fix] Implement <specific behavior>
+
+REFACTOR (if needed):
+1. Improve code without changing behavior
+2. Run all tests and verify they still pass
+3. Commit: [refactor] Clean up <what you improved>
 ```
 
 ### Before Each Commit
@@ -317,6 +382,7 @@ Does this approach look right before I proceed?
 2. Do tests pass? (working software at every step)
 3. Is the commit message clear?
 4. Is this the simplest solution? (maximize work not done)
+5. For GREEN commits: Are ALL tests passing?
 ```
 
 ### Before Requesting Review
@@ -326,6 +392,7 @@ Does this approach look right before I proceed?
 3. Is it the smallest shippable increment?
 4. Docs updated if needed?
 5. PR description links to issue?
+6. Asked human for permission to update roadmap? (see Task Completion step)
 ```
 
 ### When Blocked or Uncertain

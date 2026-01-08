@@ -122,7 +122,9 @@ See `docs/deployment.md` for detailed deployment instructions.
 
 | Document                                       | Description                         |
 | ---------------------------------------------- | ----------------------------------- |
-| [Local Development](docs/local-development.md) | How to set up and run locally       |
+| [Use Cases](docs/product/use-cases/README.md) | How product features are defined    |
+| [Use Case Validation](docs/product/use-cases/VALIDATION.md) | Quality checklist for use cases |
+| [Local Development](docs/local-development.md)   | How to set up and run locally       |
 | [Testing](docs/testing.md)                     | Testing strategy and commands       |
 | [Deployment](docs/deployment.md)               | Deployment process and environments |
 | _Add more as needed_                           |                                     |
@@ -147,8 +149,13 @@ Before contributing, read:
 Start every session by reading the docs in this order:
 
 ```
-docs/how-to-work/agent.md → stack.md → architecture.md → conventions.md → roadmap.md
+docs/how-to-work/agent.md → docs/product/use-cases/README.md → stack.md → architecture.md → conventions.md → roadmap.md
 ```
+
+**Important**: When implementing features:
+- Always read the use case(s) referenced in roadmap tasks
+- Validate the use case using the checklist in `docs/product/use-cases/VALIDATION.md`
+- Use cases are the source of truth for what features should do
 
 ### Workflow Documents
 
@@ -171,10 +178,11 @@ docs/how-to-work/agent.md → stack.md → architecture.md → conventions.md �
 ## Contributing
 
 1. Check `docs/how-to-work/roadmap.md` for available tasks
-2. Create a branch: `feature/issue-{number}-{description}`
-3. Make small, atomic commits (each must pass tests)
-4. Submit a PR solving exactly one issue
-5. Wait for review before merging
+2. Read the use case(s) referenced in the task—they define what the feature should do
+3. Create a branch: `feature/issue-{number}-{description}`
+4. Make small, atomic commits (each must pass tests)
+5. Submit a PR solving exactly one issue
+6. Wait for review before merging
 
 See [agent.md](docs/how-to-work/agent.md) for the full workflow.
 
@@ -196,6 +204,12 @@ sample-02/
 │   │   ├── retrospectives.md # Post-milestone and periodic reflections.
 │   │   ├── roadmap.md        # Tasks & priorities.
 │   │   └── stack.md          # Tech choices.
+│   ├── product/              # Product documentation
+│   │   └── use-cases/        # Use case definitions (source of truth for features)
+│   │       ├── README.md     # Guide for writing use cases
+│   │       ├── TEMPLATE.md   # Template for new use cases
+│   │       └── VALIDATION.md # Validation checklist and guide
+│   │       └── VALIDATION.md # Validation checklist and guide
 │   ├── local-development.md  # How to set up and run locally.
 │   ├── testing.md            # Testing strategy and commands.
 │   └── deployment.md         # Deployment process and environments.
