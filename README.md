@@ -124,6 +124,8 @@ See `docs/deployment.md` for detailed deployment instructions.
 | ---------------------------------------------- | ----------------------------------- |
 | [Use Cases](docs/product/use-cases/README.md) | How product features are defined    |
 | [Use Case Validation](docs/product/use-cases/VALIDATION.md) | Quality checklist for use cases |
+| [Architecture Diagrams](docs/architecture/diagrams/README.md) | Mermaid diagrams guide and examples |
+| [Decisions Log](docs/project/decisions-log.md) | Quick decisions (non-ADR)           |
 | [Local Development](docs/local-development.md)   | How to set up and run locally       |
 | [Testing](docs/testing.md)                     | Testing strategy and commands       |
 | [Deployment](docs/deployment.md)               | Deployment process and environments |
@@ -184,7 +186,7 @@ docs/how-to-work/agent.md → docs/product/use-cases/README.md → stack.md → 
 5. Submit a PR solving exactly one issue
 6. Wait for review before merging
 
-See [agent.md](docs/how-to-work/agent.md) for the full workflow.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines for humans and AI assistants.
 
 ---
 
@@ -193,32 +195,33 @@ See [agent.md](docs/how-to-work/agent.md) for the full workflow.
 ```
 sample-02/
 ├── docs/
+│   ├── architecture/
+│   │   └── diagrams/         # Mermaid diagrams (see README inside)
 │   ├── how-to-work/          # Workflow documentation
 │   │   ├── agent.md          # AI collaboration guide
 │   │   ├── architecture.md   # System design
 │   │   ├── changelog.md      # Release history
 │   │   ├── conventions.md    # Coding standards
-│   │   ├── decisions.md      # Architectural Decision Records (ADRs). Each decision is numbered and dated. Never modify past decisions—add new ones that supersede if needed.
-│   │   ├── glossary.md       # Domain terms and their definitions.
+│   │   ├── decisions.md      # Architectural Decision Records (ADRs)
+│   │   ├── glossary.md       # Domain terms and definitions
 │   │   ├── rationale.md      # Rationale for the project
-│   │   ├── retrospectives.md # Post-milestone and periodic reflections.
-│   │   ├── roadmap.md        # Tasks & priorities.
-│   │   └── stack.md          # Tech choices.
+│   │   ├── retrospectives.md # Post-milestone reflections
+│   │   ├── roadmap.md        # Tasks & priorities
+│   │   └── stack.md          # Tech choices
 │   ├── product/              # Product documentation
-│   │   └── use-cases/        # Use case definitions (source of truth for features)
-│   │       ├── README.md     # Guide for writing use cases
-│   │       ├── TEMPLATE.md   # Template for new use cases
-│   │       └── VALIDATION.md # Validation checklist and guide
-│   │       └── VALIDATION.md # Validation checklist and guide
-│   ├── local-development.md  # How to set up and run locally.
-│   ├── testing.md            # Testing strategy and commands.
-│   └── deployment.md         # Deployment process and environments.
-├── src/                      # Source code (structure depends on stack).
-├── tests/                    # Test files.
-├── CLAUDE.md                 # AI agent instructions (open standard)
-├── AGENTS.md                 # Quick context for Claude Code, redirects to AGENTS.md.
-├── LICENSE                   # License for the project.
-└── README.md                 # This file.
+│   │   └── use-cases/        # Use case definitions
+│   ├── project/
+│   │   └── decisions-log.md  # Quick decisions (non-ADR)
+│   ├── local-development.md  # How to set up and run locally
+│   ├── testing.md            # Testing strategy and commands
+│   └── deployment.md         # Deployment process and environments
+├── src/                      # Source code (structure depends on stack)
+├── tests/                    # Test files
+├── AGENTS.md                 # AI agent instructions
+├── CLAUDE.md                 # Redirects to AGENTS.md
+├── CONTRIBUTING.md           # Contribution guidelines
+├── LICENSE                   # License for the project
+└── README.md                 # This file
 ```
 
 ---
